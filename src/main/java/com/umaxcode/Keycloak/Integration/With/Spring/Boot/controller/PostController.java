@@ -3,6 +3,7 @@ package com.umaxcode.Keycloak.Integration.With.Spring.Boot.controller;
 import com.umaxcode.Keycloak.Integration.With.Spring.Boot.dto.request.PostRequestDTO;
 import com.umaxcode.Keycloak.Integration.With.Spring.Boot.dto.response.SuccessResponse;
 import com.umaxcode.Keycloak.Integration.With.Spring.Boot.service.PostService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/posts")
+@SecurityRequirement(name = "keycloak")
 @RequiredArgsConstructor
 public class PostController {
 
