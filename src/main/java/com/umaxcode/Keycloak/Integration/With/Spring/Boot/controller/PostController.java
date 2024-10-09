@@ -6,6 +6,7 @@ import com.umaxcode.Keycloak.Integration.With.Spring.Boot.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +16,7 @@ public class PostController {
 
     private final PostService postService;
 
+    @PreAuthorize("hasAnyRole('user', 'admin')")
     @PostMapping
     public ResponseEntity<SuccessResponse> addAPost(@RequestBody PostRequestDTO post) {
 
@@ -26,6 +28,7 @@ public class PostController {
                 .build());
     }
 
+    @PreAuthorize("hasAnyRole('user', 'admin')")
     @GetMapping("/{id}")
     public ResponseEntity<SuccessResponse> getAPost(@PathVariable String id) {
 
@@ -37,6 +40,7 @@ public class PostController {
                 .build());
     }
 
+    @PreAuthorize("hasAnyRole('user', 'admin')")
     @GetMapping
     public ResponseEntity<SuccessResponse> getAllPosts() {
 
@@ -48,6 +52,7 @@ public class PostController {
                 .build());
     }
 
+    @PreAuthorize("hasAnyRole('user', 'admin')")
     @PatchMapping("/{id}")
     public ResponseEntity<SuccessResponse> updateAPost(@PathVariable String id, @RequestBody PostRequestDTO post) {
         var response = postService.updatePost(id, post);
@@ -58,6 +63,7 @@ public class PostController {
                 .build());
     }
 
+    @PreAuthorize("hasAnyRole('admin')")
     @DeleteMapping("/{id}")
     public ResponseEntity<SuccessResponse> deleteAPost(@PathVariable String id) {
         postService.deletePost(id);
